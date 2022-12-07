@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+
+import GlobalStyle from './globalStyles.js'
+import SelecionarFilme from "./components/SelecionarFilme.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Tela>
+        <Cabecalho>
+          <h1>CINEFLEX</h1>
+        </Cabecalho>
+        <SelecionarFilme/>
+      </Tela>
+    </>
   );
 }
 
 export default App;
+
+const Cabecalho = styled.div`
+  height: 67px;
+  width: 375px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #C3CFD9;
+  display: flex;
+  align-items: center;
+;
+
+  h1{
+    font-family: Roboto;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #E8833A;
+    margin: auto;
+
+  }
+`
+
+const Tela = styled.div`
+  min-height: 100vh;
+  width: 375px;
+  background-color: aliceblue;
+  padding-top: 110px;
+
+
+`
