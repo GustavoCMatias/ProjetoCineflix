@@ -29,14 +29,30 @@ export default function SelecionarLugar() {
                             <p>{item.name}</p>
                         </Lugar>)}
                 </Lugares>
+                <Exemplos>
+                    <div>
+                        <Lugar disponibilidade='true' />
+                        <p>Selecionado</p>
+                    </div>
+
+                    <div>
+                        <Lugar disponibilidade='true' />
+                        <p>Disponível</p>
+                    </div>
+
+                    <div>
+                        <Lugar disponibilidade='true' />
+                        <p>Indisponível</p>
+                    </div>
+                </Exemplos>
 
             </TelaLugares>
 
             <Rodape>
                 <div>
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="Poster do filme escolhido"/>
+                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="Poster do filme escolhido" />
                 </div>
-                <h2>Zack Snyder Justice League <br/>Quinta-feira - 15:00</h2>
+                <h2>Zack Snyder Justice League <br />Quinta-feira - 15:00</h2>
 
 
             </Rodape>
@@ -63,6 +79,7 @@ const TelaLugares = styled.div`
 
         margin-bottom: 25px;
     }
+
 `
 
 const Lugares = styled.div`
@@ -134,4 +151,24 @@ const Rodape = styled.div`
     height: 72px;
     width: 48px;
   }
+`
+
+const Exemplos = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    p{
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 15px;
+
+    }
 `
