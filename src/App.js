@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GlobalStyle from './globalStyles.js'
 import SelecionarFilme from "./components/SelecionarFilme.js";
 import SelecionarHorario from "./components/SelecionarHorario.js";
+import SelecionarLugar from "./components/SelecionarLugar.js";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           <h1>CINEFLEX</h1>
         </Cabecalho>
 
-        <SelecionarHorario/>
+        <SelecionarLugar/>
       </Tela>
     </>
   );
