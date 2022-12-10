@@ -18,7 +18,8 @@ function AvalilarCor(disponibilidade, clicado){
 export default function SelecionarLugar({infos, setInfos}) {
     function ReservarAssento(e){
         e.preventDefault()
-        const body={ids:{idAssentos}, name:nome, cpf:cpf}
+        const body={ids:[...idAssentos], name:nome, cpf:cpf}
+        console.log(body)
         setInfos({...infos, nome_cliente: nome, cpf, assentosEscolhidos})
         const req = axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', body)
         
