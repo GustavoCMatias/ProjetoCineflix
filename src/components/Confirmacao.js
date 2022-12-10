@@ -1,26 +1,31 @@
 import styled from "styled-components"
 
-export default function Confirmacao(){
+export default function Confirmacao() {
 
-    return(
-        <TelaConfirmacao>
-        <h1>Pedido feito com sucesso!</h1>
+    return (
+        <>
+            <Cabecalho>
+                <h1>CINEFLEX</h1>
+            </Cabecalho>
+            <TelaConfirmacao>
+                <h1>Pedido feito com sucesso!</h1>
 
-        <h1>Filme e sessão</h1>
-        <p>Enola Holmes <br/>24/06/2021 15:00</p>
+                <h1>Filme e sessão</h1>
+                <p>Enola Holmes <br />24/06/2021 15:00</p>
 
-        <h1>Ingressos</h1>
-        <p>Assento 15</p>
-        <p>Assento 16</p>
+                <h1>Ingressos</h1>
+                <p>Assento 15</p>
+                <p>Assento 16</p>
 
-        <h1>Comprador</h1>
-        <p>Nome: João da Silva Sauro</p>
-        <p>CPF: 123.456.789-10</p>
+                <h1>Comprador</h1>
+                <p>Nome: João da Silva Sauro</p>
+                <p>CPF: 123.456.789-10</p>
 
-        <button>Voltar para Home</button>
-        </TelaConfirmacao>
+                <button>Voltar para Home</button>
+            </TelaConfirmacao>
+        </>
     )
-    
+
 }
 
 const TelaConfirmacao = styled.div`
@@ -42,7 +47,7 @@ const TelaConfirmacao = styled.div`
 
     h1:nth-child(1){
         color: #247A6B;
-        text-align: center;
+        margin: auto;
         margin-top: 0px;
     }
     
@@ -75,4 +80,28 @@ const TelaConfirmacao = styled.div`
 
     }
     
+`
+
+const Cabecalho = styled.div`
+  height: 67px;
+  width: 375px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #C3CFD9;
+  display: flex;
+  align-items: center;
+;
+
+  h1{
+    font-family: Roboto;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #E8833A;
+    margin: auto;
+
+  }
 `

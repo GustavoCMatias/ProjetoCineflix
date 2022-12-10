@@ -11,7 +11,8 @@ export default function SelecionarLugar() {
         const req = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/showtimes/5/seats')
         req.then(resposta => {
             setAssentos(resposta.data.seats)
-        })
+        }
+        )
     }, [])
 
     assentos.map(item => console.log(item.isAvailable))
@@ -19,6 +20,10 @@ export default function SelecionarLugar() {
 
     return (
         <>
+            <Cabecalho>
+                <h1>CINEFLEX</h1>
+            </Cabecalho>
+            
             <TelaLugares>
                 <h1>
                     Selecione o(s) assento(s)
@@ -171,4 +176,28 @@ const Exemplos = styled.div`
         line-height: 15px;
 
     }
+`
+
+const Cabecalho = styled.div`
+  height: 67px;
+  width: 375px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #C3CFD9;
+  display: flex;
+  align-items: center;
+;
+
+  h1{
+    font-family: Roboto;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #E8833A;
+    margin: auto;
+
+  }
 `

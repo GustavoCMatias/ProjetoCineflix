@@ -11,10 +11,6 @@ function App() {
     <>
       <GlobalStyle />
       <Tela>
-        <Cabecalho>
-          <h1>CINEFLEX</h1>
-        </Cabecalho>
-
         <Confirmacao/>
       </Tela>
     </>
@@ -22,30 +18,6 @@ function App() {
 }
 
 export default App;
-
-const Cabecalho = styled.div`
-  height: 67px;
-  width: 375px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #C3CFD9;
-  display: flex;
-  align-items: center;
-;
-
-  h1{
-    font-family: Roboto;
-    font-size: 34px;
-    font-weight: 400;
-    line-height: 40px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #E8833A;
-    margin: auto;
-
-  }
-`
 
 const Tela = styled.div`
   min-height: 100vh;
