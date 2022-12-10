@@ -7,12 +7,13 @@ import SelecionarLugar from "./components/SelecionarLugar.js";
 import Confirmacao from "./components/Confirmacao.js";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 
 
 function App() {
 
   const [infos, setInfos] = React.useState({})
+  useEffect(() => setInfos({}),[])
 
   return (
     <BrowserRouter>
@@ -22,7 +23,7 @@ function App() {
         <Route path="/" element={<SelecionarFilme infos={infos} setInfos={setInfos}/>} />
         <Route path="/sessoes/:idFilme" element={<SelecionarHorario infos={infos} setInfos={setInfos}/>} />
         <Route path="/assentos/:idSessao" element={<SelecionarLugar infos={infos} setInfos={setInfos}/>} />
-        <Route path="/confirmacao" element={<Confirmacao infos={infos} setInfos={setInfos}/>} />
+        <Route path="/sucesso" element={<Confirmacao infos={infos} setInfos={setInfos}/>} />
         </Routes>
       </Tela>
     </BrowserRouter>

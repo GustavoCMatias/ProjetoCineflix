@@ -16,7 +16,6 @@ function AvalilarCor(disponibilidade, clicado){
 
 
 export default function SelecionarLugar({infos, setInfos}) {
-
     function ReservarAssento(e){
         e.preventDefault()
         const body={ids:{idAssentos}, name:nome, cpf:cpf}
@@ -25,14 +24,20 @@ export default function SelecionarLugar({infos, setInfos}) {
         
         req.then((result) =>{
             console.log(result.data);
-            nav('/confirmacao')})
+            nav('/sucesso')})
     }
 
     function cliqueLugar(nome, disponibilidade, id){
-        if (!assentosEscolhidos.includes(nome) && disponibilidade){
-            setAssentosEscolhidos([...assentosEscolhidos,nome].sort())
-            setIdAssentos([...idAssentos, id])
+        if (disponibilidade){
+            if (!assentosEscolhidos.includes(nome)){
+                setAssentosEscolhidos([...assentosEscolhidos,nome].sort())
+                setIdAssentos([...idAssentos, id])
+            }else{
+                setAssentosEscolhidos(assentosEscolhidos.filter((item)=>item!==nome))
+                setIdAssentos(idAssentos.filter((item)=>item!==id))
+            }
         }
+        
     }
 
     const [nome, setNome] = React.useState([])
@@ -42,6 +47,7 @@ export default function SelecionarLugar({infos, setInfos}) {
     const [idAssentos, setIdAssentos] =React.useState([])
     const params =useParams();
     const nav = useNavigate();
+    console.log(assentosEscolhidos)
 
     useEffect(() => {
         const req = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idSessao}/seats`)
