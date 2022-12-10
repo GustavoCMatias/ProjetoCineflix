@@ -6,14 +6,22 @@ import SelecionarHorario from "./components/SelecionarHorario.js";
 import SelecionarLugar from "./components/SelecionarLugar.js";
 import Confirmacao from "./components/Confirmacao.js";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
       <Tela>
-        <Confirmacao/>
+        <Routes>
+        <Route path="/" element={<SelecionarFilme />} />
+        <Route path="/sessoes/idFilme" element={<SelecionarHorario />} />
+        <Route path="/assentos/idSessao" element={<SelecionarLugar />} />
+        <Route path="/confirmacao" element={<Confirmacao />} />
+        </Routes>
       </Tela>
-    </>
+    </BrowserRouter>
   );
 }
 
