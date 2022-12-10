@@ -34,7 +34,7 @@ export default function SelecionarFilme({infos, setInfos}) {
                 <div>
                     {filmes.map(item => 
                     <Link to={`/sessoes/${item.id}`} key={item.id}>
-                    <img src={item.posterURL} alt="poster do filme" onClick={() => EscolherFilme(item.posterURL, item.title)}/>
+                    <img src={item.posterURL} data-test="movie" alt="poster do filme" onClick={() => EscolherFilme(item.posterURL, item.title)}/>
                     </Link>)}
                 </div>
 

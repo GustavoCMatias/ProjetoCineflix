@@ -23,7 +23,6 @@ export default function SelecionarLugar({infos, setInfos}) {
         const req = axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', body)
         
         req.then((result) =>{
-            console.log(result.data);
             nav('/sucesso')})
     }
 
@@ -36,6 +35,8 @@ export default function SelecionarLugar({infos, setInfos}) {
                 setAssentosEscolhidos(assentosEscolhidos.filter((item)=>item!==nome))
                 setIdAssentos(idAssentos.filter((item)=>item!==id))
             }
+        }else{
+            alert('Este assento não está disponível')
         }
         
     }
@@ -47,7 +48,6 @@ export default function SelecionarLugar({infos, setInfos}) {
     const [idAssentos, setIdAssentos] =React.useState([])
     const params =useParams();
     const nav = useNavigate();
-    console.log(assentosEscolhidos)
 
     useEffect(() => {
         const req = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idSessao}/seats`)
@@ -71,7 +71,7 @@ export default function SelecionarLugar({infos, setInfos}) {
                 </h1>
                 <Lugares>
                     {assentos.map(item =>
-                        <Lugar disponibilidade={item.isAvailable} clicado={assentosEscolhidos.includes(item.name)} key={item.id} onClick={() => cliqueLugar(item.name, item.isAvailable, item.id)}>
+                        <Lugar data-test="seat" disponibilidade={item.isAvailable} clicado={assentosEscolhidos.includes(item.name)} key={item.id} onClick={() => cliqueLugar(item.name, item.isAvailable, item.id)}>
                             <p>{item.name}</p>
                         </Lugar>)}
                 </Lugares>
@@ -99,7 +99,8 @@ export default function SelecionarLugar({infos, setInfos}) {
                     value={nome}
                     onChange={e => setNome(e.target.value)}
                     placeholder="Digite seu nome..."
-                    required/>
+                    required
+                    data-test="client-name"/>
 
                     <label htmlFor="CPF">CPF do comprador:</label>
                     <input type="number" 
@@ -107,14 +108,15 @@ export default function SelecionarLugar({infos, setInfos}) {
                     value={cpf}
                     onChange={e => setCpf(e.target.value)}
                     placeholder="Digite seu CPF..."
-                    required/>
+                    required
+                    data-test="client-cpf"/>
 
-                    <button type="submit">Reservar assento(s)</button>
+                    <button type="submit" data-test="book-seat-btn">Reservar assento(s)</button>
                 </form>
 
             </TelaLugares>
 
-            <Rodape>
+            <Rodape data-test="footer">
                 <div>
                     <img src={infos.poster} alt="Poster do filme escolhido"/>
                 </div>

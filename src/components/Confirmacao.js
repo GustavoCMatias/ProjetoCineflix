@@ -1,30 +1,36 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom";
 
-export default function Confirmacao({infos, setInfos}) {
-    
+export default function Confirmacao({ infos }) {
+
     return (
         <>
             <Cabecalho>
                 <h1>CINEFLEX</h1>
             </Cabecalho>
             <TelaConfirmacao>
-                <h1>Pedido feito com sucesso!</h1>
+                <Titulo>Pedido feito com sucesso!</Titulo>
 
-                <h1>Filme e sessão</h1>
-                <p>{infos.nome}<br />{infos.data}{' '}{infos.hora}</p>
+                <div data-test="movie-info">
+                    <h1>Filme e sessão</h1>
+                    <p>{infos.nome}<br />{infos.data}{' '}{infos.hora}</p>
+                </div>
 
-                <h1>Ingressos</h1>
-                {infos.assentosEscolhidos.map(item => <p key={item}>Assento {item}</p>)}
+                <div data-test="seats-info"> 
+                    <h1>Ingressos</h1>
+                    {infos.assentosEscolhidos.map(item => <p key={item}>Assento {item}</p>)}
+                </div>
 
-                <h1>Comprador</h1>
-                <p>Nome: {infos.nome_cliente}</p>
-                <p>CPF: {infos.cpf}</p>
+                <div data-test="client-info">
+                    <h1>Comprador</h1>
+                    <p>Nome: {infos.nome_cliente}</p>
+                    <p>CPF: {infos.cpf}</p>
+                </div>
 
-                <Link to="/">
+                <Link to="/" data-test="go-home-btn">
                     <button>Voltar para Home</button>
                 </Link>
-                
+
             </TelaConfirmacao>
         </>
     )
@@ -46,12 +52,6 @@ const TelaConfirmacao = styled.div`
         margin-top: 60px;
         margin-bottom: 7px;
 
-    }
-
-    h1:nth-child(1){
-        color: #247A6B;
-        margin: auto;
-        margin-top: 0px;
     }
     
     p{
@@ -75,7 +75,8 @@ const TelaConfirmacao = styled.div`
         border: none;
 
         margin: auto;
-        margin-top: 60px;
+        margin-top: 50px;
+        margin-bottom: 20px;
 
         text-align: center;
         margin-left: 45px;
@@ -83,6 +84,12 @@ const TelaConfirmacao = styled.div`
 
     }
     
+`
+
+const Titulo = styled.h1`
+    color: #247A6B;
+    margin: auto;
+    margin-top: 0px;
 `
 
 const Cabecalho = styled.div`

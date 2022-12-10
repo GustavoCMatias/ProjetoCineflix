@@ -29,11 +29,11 @@ export default function SelecionarHorario({ infos, setInfos }) {
                     Selecione o horário
                 </h1>
                 {horarios.map(item =>
-                    <div key={item.id}>
+                    <div key={item.id} data-test="movie-day">
                         <p>{item.weekday} - {item.date}</p>
                         {item.showtimes.map(each =>
                             <Link to={`/assentos/${each.id}`} key={each.id}>
-                                <button onClick={() => EscolherHorario(item.date, item.weekday, each.name)}>{each.name}</button>
+                                <button data-test="showtime" onClick={() => EscolherHorario(item.date, item.weekday, each.name)}>{each.name}</button>
                             </Link>)}
 
                     </div>)}
@@ -43,7 +43,7 @@ export default function SelecionarHorario({ infos, setInfos }) {
 
             </TelaHorarios>
 
-            <Rodape>
+            <Rodape data-test="footer">
                 <div>
                     <img src={infos.poster} alt="Poster do filme escolhido" />
                 </div>
