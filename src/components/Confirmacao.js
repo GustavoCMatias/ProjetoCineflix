@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom";
 
 export default function Confirmacao() {
 
@@ -21,7 +22,10 @@ export default function Confirmacao() {
                 <p>Nome: João da Silva Sauro</p>
                 <p>CPF: 123.456.789-10</p>
 
-                <button>Voltar para Home</button>
+                <Link to="/">
+                    <button>Voltar para Home</button>
+                </Link>
+                
             </TelaConfirmacao>
         </>
     )

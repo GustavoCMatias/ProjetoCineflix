@@ -5,6 +5,8 @@ import styled from "styled-components"
 
 export default function SelecionarLugar() {
 
+    const [nome, setNome] = React.useState([])
+    const [cpf, setCpf] = React.useState([]) 
     const [assentos, setAssentos] = React.useState([])
 
     useEffect(() => {
@@ -23,7 +25,7 @@ export default function SelecionarLugar() {
             <Cabecalho>
                 <h1>CINEFLEX</h1>
             </Cabecalho>
-            
+
             <TelaLugares>
                 <h1>
                     Selecione o(s) assento(s)
@@ -50,6 +52,24 @@ export default function SelecionarLugar() {
                         <p>Indisponível</p>
                     </div>
                 </Exemplos>
+
+                <form onSubmit={()=>{}}>
+                    <label for="Nome">Nome do comprador:</label>
+                    <input type="text" 
+                    id="Nome" 
+                    value={nome}
+                    onChange={e => setNome(e.target.value)}
+                    placeholder="Digite seu CPF..."/>
+
+                    <label for="CPF">CPF do comprador:</label>
+                    <input type="number" 
+                    id="CPF" 
+                    value={nome}
+                    onChange={e => setCpf(e.target.value)}
+                    placeholder="Digite seu nome..."/>
+
+                    <button type="submit">Reservar assento(s)</button>
+                </form>
 
             </TelaLugares>
 
@@ -83,6 +103,58 @@ const TelaLugares = styled.div`
         text-align: center;
 
         margin-bottom: 25px;
+    }
+
+    button{
+        height: 42px;
+        width: 225px;
+        border-radius: 3px;
+        background-color: #E8833A;
+        color: #FFFFFF;
+        border: none;
+
+        margin: auto;
+        margin-top: 30px;
+
+        text-align: center;
+        margin-left: 45px;
+        margin-bottom: 137px;
+        
+
+    }
+
+    input{
+        font-family: Roboto;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: left;
+
+
+        background-color: #FFFFFF;
+        border: 1px solid #D4D4D4;
+
+        width: 327px;
+        height: 51px;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    label{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-top: 10px;
+        margin-bottom:5px;
+
     }
 
 `

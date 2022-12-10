@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect } from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom";
 
 export default function SelecionarHorario() {
     const [horarios, setHorarios] = React.useState([])
@@ -29,7 +30,7 @@ export default function SelecionarHorario() {
                 {horarios.map(item =>
                     <div>
                         <p>{item.weekday} - {item.date}</p>
-                        {item.showtimes.map(each => <button>{each.name}</button>)}
+                        {item.showtimes.map(each => <Link to="/assentos/5"><button>{each.name}</button></Link>)}
 
                     </div>)}
 

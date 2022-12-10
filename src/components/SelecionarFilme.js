@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 export default function SelecionarFilme() {
@@ -28,13 +29,17 @@ export default function SelecionarFilme() {
                     Selecione o filme
                 </h1>
                 <div>
-                    {filmes.map(item => <img src={item.posterURL} alt="poster do filme" key={item.id} />)}
+                    {filmes.map(item => 
+                    <Link to="/sessoes/7">
+                    <img src={item.posterURL} alt="poster do filme" key={item.id} />
+                    </Link>)}
                 </div>
 
             </TelaFilme>
         </>
     )
 }
+
 
 
 const TelaFilme = styled.div`
@@ -64,11 +69,15 @@ const TelaFilme = styled.div`
 
     img{
         width: 129px;
-        margin: auto;
+        
+        margin-bottom: 23px;
+        margin-left: 6.25px;
+        margin-right: 6.25px;
 
-        margin-bottom: 27px;
+        border: 8px solid #ffffff;
         
     }
+
 `
 
 const Cabecalho = styled.div`

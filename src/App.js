@@ -16,8 +16,8 @@ function App() {
       <Tela>
         <Routes>
         <Route path="/" element={<SelecionarFilme />} />
-        <Route path="/sessoes/idFilme" element={<SelecionarHorario />} />
-        <Route path="/assentos/idSessao" element={<SelecionarLugar />} />
+        <Route path="/sessoes/:idFilme" element={<SelecionarHorario />} />
+        <Route path="/assentos/:idSessao" element={<SelecionarLugar />} />
         <Route path="/confirmacao" element={<Confirmacao />} />
         </Routes>
       </Tela>
