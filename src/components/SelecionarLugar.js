@@ -4,25 +4,46 @@ import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 
 
+function AvalilarCor(disponibilidade, clicado){
+    if(!disponibilidade){
+        return(['#FBE192', '#F7C52B'])
+    }else if(clicado){
+        return(['#1AAE9E', '#0E7D71'])
+    } else{
+        return(['#C3CFD9', '#7B8B99'])
+    }
+}
+
+
 export default function SelecionarLugar({infos, setInfos}) {
 
     function ReservarAssento(e){
         e.preventDefault()
-        const body={ids:[], name:nome, cpf:cpf}
-        //axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', body)
+        const body={ids:{idAssentos}, name:nome, cpf:cpf}
+        setInfos({...infos, nome_cliente: nome, cpf, assentosEscolhidos})
+        const req = axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', body)
+        
+        req.then((result) =>{
+            console.log(result.data);
+            nav('/confirmacao')})
+    }
 
-        setInfos({...infos, nome_cliente: nome, cpf})
-        nav('/confirmacao')
+    function cliqueLugar(nome, disponibilidade, id){
+        if (!assentosEscolhidos.includes(nome) && disponibilidade){
+            setAssentosEscolhidos([...assentosEscolhidos,nome].sort())
+            setIdAssentos([...idAssentos, id])
+        }
     }
 
     const [nome, setNome] = React.useState([])
     const [cpf, setCpf] = React.useState([]) 
     const [assentos, setAssentos] = React.useState([])
+    const [assentosEscolhidos, setAssentosEscolhidos] = React.useState([])
+    const [idAssentos, setIdAssentos] =React.useState([])
     const params =useParams();
     const nav = useNavigate();
 
     useEffect(() => {
-        console.log(infos)
         const req = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idSessao}/seats`)
         req.then(resposta => {
             setAssentos(resposta.data.seats)
@@ -44,23 +65,23 @@ export default function SelecionarLugar({infos, setInfos}) {
                 </h1>
                 <Lugares>
                     {assentos.map(item =>
-                        <Lugar disponibilidade={item.isAvailable} key={item.id}>
+                        <Lugar disponibilidade={item.isAvailable} clicado={assentosEscolhidos.includes(item.name)} key={item.id} onClick={() => cliqueLugar(item.name, item.isAvailable, item.id)}>
                             <p>{item.name}</p>
                         </Lugar>)}
                 </Lugares>
                 <Exemplos>
                     <div>
-                        <Lugar disponibilidade='true' />
+                        <Lugar disponibilidade={true} clicado={true}/>
                         <p>Selecionado</p>
                     </div>
 
                     <div>
-                        <Lugar disponibilidade='true' />
+                        <Lugar disponibilidade={true} clicado={false}/>
                         <p>Disponível</p>
                     </div>
 
                     <div>
-                        <Lugar disponibilidade='true' />
+                        <Lugar disponibilidade={false} clicado={false}/>
                         <p>Indisponível</p>
                     </div>
                 </Exemplos>
@@ -183,9 +204,9 @@ const Lugar = styled.div`
     width: 26px;
     border-radius: 13px;
 
-    background-color: ${props => props.disponibilidade ? '#C3CFD9' : '#FBE192'};
+    background-color: ${props => AvalilarCor(props.disponibilidade, props.clicado)[0]};
 
-    border: 1px solid ${props => props.disponibilidade ? '#808F9D' : '#F7C52B'};
+    border: 1px solid ${props => AvalilarCor(props.disponibilidade, props.clicado)[1]};
 
     margin-right: 6px;
     margin-bottom: 18px;

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom";
 
 export default function Confirmacao({infos, setInfos}) {
-
+    
     return (
         <>
             <Cabecalho>
@@ -15,8 +15,7 @@ export default function Confirmacao({infos, setInfos}) {
                 <p>{infos.nome}<br />{infos.data}{' '}{infos.hora}</p>
 
                 <h1>Ingressos</h1>
-                <p>Assento 15</p>
-                <p>Assento 16</p>
+                {infos.assentosEscolhidos.map(item => <p key={item}>Assento {item}</p>)}
 
                 <h1>Comprador</h1>
                 <p>Nome: {infos.nome_cliente}</p>
