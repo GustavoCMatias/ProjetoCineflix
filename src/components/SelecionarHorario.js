@@ -1,20 +1,21 @@
 import axios from "axios"
 import React, { useEffect } from "react"
 import styled from "styled-components"
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-export default function SelecionarHorario() {
+export default function SelecionarHorario({ infos, setInfos }) {
     const [horarios, setHorarios] = React.useState([])
+    const params = useParams();
 
     useEffect(() => {
-        const req = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/6/showtimes')
+        const req = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${params.idFilme}/showtimes`)
         req.then(resposta => {
             setHorarios(resposta.data.days)
         })
     }, [])
 
-    if (horarios) {
-        console.log(horarios)
+    function EscolherHorario(data, dia, hora){
+        setInfos({...infos, data, dia, hora})
     }
 
 
@@ -28,9 +29,12 @@ export default function SelecionarHorario() {
                     Selecione o horário
                 </h1>
                 {horarios.map(item =>
-                    <div>
+                    <div key={item.id}>
                         <p>{item.weekday} - {item.date}</p>
-                        {item.showtimes.map(each => <Link to="/assentos/5"><button>{each.name}</button></Link>)}
+                        {item.showtimes.map(each =>
+                            <Link to={`/assentos/${each.id}`} key={each.id}>
+                                <button onClick={() => EscolherHorario(item.date, item.weekday, each.name)}>{each.name}</button>
+                            </Link>)}
 
                     </div>)}
 
@@ -41,9 +45,9 @@ export default function SelecionarHorario() {
 
             <Rodape>
                 <div>
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="Poster do filme escolhido"/>
+                    <img src={infos.poster} alt="Poster do filme escolhido" />
                 </div>
-                <h2>Zack Snyder Justice League</h2>
+                <h2>{infos.nome}</h2>
 
 
             </Rodape>

@@ -4,16 +4,19 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 
-export default function SelecionarFilme() {
+export default function SelecionarFilme({infos, setInfos}) {
     const [filmes, setFilmes] = React.useState([])
 
     useEffect(() => {
         const req = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
         req.then(resposta => {
             setFilmes(resposta.data)
-            console.log(resposta.data)
         })
     }, [])
+
+    function EscolherFilme(poster, nome){
+        setInfos({...infos, poster, nome})
+    }
 
 
     return (
@@ -30,8 +33,8 @@ export default function SelecionarFilme() {
                 </h1>
                 <div>
                     {filmes.map(item => 
-                    <Link to="/sessoes/7">
-                    <img src={item.posterURL} alt="poster do filme" key={item.id} />
+                    <Link to={`/sessoes/${item.id}`} key={item.id}>
+                    <img src={item.posterURL} alt="poster do filme" onClick={() => EscolherFilme(item.posterURL, item.title)}/>
                     </Link>)}
                 </div>
 

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom";
 
-export default function Confirmacao() {
+export default function Confirmacao({infos, setInfos}) {
 
     return (
         <>
@@ -12,15 +12,15 @@ export default function Confirmacao() {
                 <h1>Pedido feito com sucesso!</h1>
 
                 <h1>Filme e sessão</h1>
-                <p>Enola Holmes <br />24/06/2021 15:00</p>
+                <p>{infos.nome}<br />{infos.data}{' '}{infos.hora}</p>
 
                 <h1>Ingressos</h1>
                 <p>Assento 15</p>
                 <p>Assento 16</p>
 
                 <h1>Comprador</h1>
-                <p>Nome: João da Silva Sauro</p>
-                <p>CPF: 123.456.789-10</p>
+                <p>Nome: {infos.nome_cliente}</p>
+                <p>CPF: {infos.cpf}</p>
 
                 <Link to="/">
                     <button>Voltar para Home</button>

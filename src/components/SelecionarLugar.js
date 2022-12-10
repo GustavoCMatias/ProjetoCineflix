@@ -1,23 +1,35 @@
 import axios from "axios"
 import React, { useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 
 
-export default function SelecionarLugar() {
+export default function SelecionarLugar({infos, setInfos}) {
+
+    function ReservarAssento(e){
+        e.preventDefault()
+        const body={ids:[], name:nome, cpf:cpf}
+        //axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', body)
+
+        setInfos({...infos, nome_cliente: nome, cpf})
+        nav('/confirmacao')
+    }
 
     const [nome, setNome] = React.useState([])
     const [cpf, setCpf] = React.useState([]) 
     const [assentos, setAssentos] = React.useState([])
+    const params =useParams();
+    const nav = useNavigate();
 
     useEffect(() => {
-        const req = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/showtimes/5/seats')
+        console.log(infos)
+        const req = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idSessao}/seats`)
         req.then(resposta => {
             setAssentos(resposta.data.seats)
         }
         )
     }, [])
 
-    assentos.map(item => console.log(item.isAvailable))
 
 
     return (
@@ -32,7 +44,7 @@ export default function SelecionarLugar() {
                 </h1>
                 <Lugares>
                     {assentos.map(item =>
-                        <Lugar disponibilidade={item.isAvailable}>
+                        <Lugar disponibilidade={item.isAvailable} key={item.id}>
                             <p>{item.name}</p>
                         </Lugar>)}
                 </Lugares>
@@ -53,20 +65,22 @@ export default function SelecionarLugar() {
                     </div>
                 </Exemplos>
 
-                <form onSubmit={()=>{}}>
-                    <label for="Nome">Nome do comprador:</label>
+                <form onSubmit={ReservarAssento}>
+                    <label htmlFor="Nome">Nome do comprador:</label>
                     <input type="text" 
                     id="Nome" 
                     value={nome}
                     onChange={e => setNome(e.target.value)}
-                    placeholder="Digite seu CPF..."/>
+                    placeholder="Digite seu nome..."
+                    required/>
 
-                    <label for="CPF">CPF do comprador:</label>
+                    <label htmlFor="CPF">CPF do comprador:</label>
                     <input type="number" 
                     id="CPF" 
-                    value={nome}
+                    value={cpf}
                     onChange={e => setCpf(e.target.value)}
-                    placeholder="Digite seu nome..."/>
+                    placeholder="Digite seu CPF..."
+                    required/>
 
                     <button type="submit">Reservar assento(s)</button>
                 </form>
@@ -75,9 +89,9 @@ export default function SelecionarLugar() {
 
             <Rodape>
                 <div>
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="Poster do filme escolhido" />
+                    <img src={infos.poster} alt="Poster do filme escolhido"/>
                 </div>
-                <h2>Zack Snyder Justice League <br />Quinta-feira - 15:00</h2>
+                <h2>{infos.nome} <br />{infos.dia} - {infos.hora}</h2>
 
 
             </Rodape>
